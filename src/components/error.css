@@ -1,0 +1,11 @@
+.containerError {
+margin-left:40%;
+margin-right: auto;
+padding: 0;
+
+    
+}
+
+.containerError span {
+    font-size: 100px;
+}
