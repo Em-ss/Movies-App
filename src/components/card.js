@@ -6,14 +6,14 @@ import './card.css';
 
 export class Card extends Component {
   render() {
-    const { item, loading } = this.props;
+    const { item, loading, updateData2, sessionId } = this.props;
 
     const spin = loading ? (
       <div className="card-spin">
         <Spin tip="Loading..." />
       </div>
     ) : null;
-    const content = !loading ? <CardValue item={item} /> : null;
+    const content = !loading ? <CardValue item={item} updateData2={updateData2} sessionId={sessionId} /> : null;
 
     return (
       <Col span={12}>
