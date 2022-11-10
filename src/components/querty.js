@@ -41,6 +41,10 @@ export class Querty {
       `/guest_session/${sessionId}/rated/movies?api_key=4158dc7df2e1782751f47547e3ae9bc1&language=en-US&sort_by=created_at.asc`
     );
   }
+  getId() {
+    return this.getResource('/genre/movie/list?api_key=4158dc7df2e1782751f47547e3ae9bc1&language=en-US');
+  }
+
   setRatedMovie(id, sessionId, star) {
     return this.getResourcePOST(
       `/movie/${id}/rating?api_key=4158dc7df2e1782751f47547e3ae9bc1&guest_session_id=${sessionId}`,

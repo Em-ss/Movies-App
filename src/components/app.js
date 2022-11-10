@@ -9,12 +9,14 @@ import { Querty } from './querty';
 import { NetworkState } from './network-state.js';
 import { Search } from './search.js';
 import { Header } from './header.js';
+import { AppContext } from './context-app';
 
 export class App extends Component {
   constructor() {
     super(), (this.querty = new Querty());
     this.state = {
       items: [],
+      itemsRated: [],
       loading: true,
       error: false,
       network: false,
@@ -22,6 +24,9 @@ export class App extends Component {
       name: '',
       sessionId: '',
       check: true,
+      oneSession: true,
+      btn: true,
+      getId: [],
     };
   }
 
@@ -50,7 +55,7 @@ export class App extends Component {
       .then((items) => {
         // console.log(items.results)
         this.setState({
-          items: items.results,
+          itemsRated: items.results,
           loading: false,
         });
         console.log(items);
@@ -72,28 +77,26 @@ export class App extends Component {
   onChange(page) {
     this.updateData(page, this.state.name);
   }
-  // onChangeSearch(name) {
-  //   this.updateData(this.state.page, name);
-  // }
+
   componentDidMount() {
     this.querty.newSession().then((session) => {
-      // console.log(session.guest_session_id);
       this.setState({
         sessionId: session.guest_session_id,
       });
     });
-    // this.querty.newSession();/
-    // this.updateData(this.state.page, this.state.name);
+    this.querty.getId().then((value) => {
+      this.setState({
+        getId: value.genres,
+      });
+    });
   }
-  // componentDidUpdate() {
-  //
-  // }
-  onChangeRated() {
-    this.setState((prevState) => ({ check: !prevState.check }));
+
+  onChangeRated2() {
     this.updateData1(this.state.sessionId);
+    this.setState({ check: false, oneSession: false, btn: false });
   }
   onChangeRated1() {
-    this.setState((prevState) => ({ check: prevState.items }));
+    this.setState({ check: true, btn: true });
     this.updateData(this.state.page, this.state.name);
   }
 
@@ -110,22 +113,27 @@ export class App extends Component {
         />
       </>
     ) : (
-      <CardList items={this.state.items} loading={this.state.loading} />
+      <CardList items={this.state.itemsRated} loading={this.state.loading} />
     );
-    // null;
 
     const contentError = this.state.error ? <ContentError /> : null;
     const content = !this.state.error ? cardlist : null;
-    // console.log(this.state.sessionId);
-    return (
-      <div className="container">
-        <Header onChangeRated={this.onChangeRated.bind(this)} onChangeRated1={this.onChangeRated1.bind(this)} />
 
-        {this.state.network ? <Alert className="alert alert-net" message="Нет Сети" /> : null}
-        {contentError}
-        {content}
-        <NetworkState onNetworkState={this.onNetworkState.bind(this)} />
-      </div>
+    return (
+      <AppContext.Provider value={this.state.getId}>
+        <div className="container">
+          <Header
+            onChangeRated2={this.onChangeRated2.bind(this)}
+            onChangeRated1={this.onChangeRated1.bind(this)}
+            btn={this.state.btn}
+          />
+
+          {this.state.network ? <Alert className="alert alert-net" message="Нет Сети" /> : null}
+          {contentError}
+          {content}
+          <NetworkState onNetworkState={this.onNetworkState.bind(this)} />
+        </div>
+      </AppContext.Provider>
     );
   }
 }

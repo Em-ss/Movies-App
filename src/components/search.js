@@ -20,7 +20,7 @@ export class Search extends Component {
   }
 
   componentDidUpdate() {
-    this.debounceWrapper(1, this.state.label ? this.state.label : null);
+    this.state.label ? this.debounceWrapper(1, this.state.label) : null;
   }
 
   // onKeyDown() {}

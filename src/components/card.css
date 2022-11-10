@@ -5,6 +5,7 @@
     margin-top:19px;
     margin-left:32px;
     box-shadow:  0 0 5px 1px;
+    position: relative;
 }
 
 .card-image {
@@ -21,9 +22,11 @@
 
 .card-group {
     height: 281px;
-    margin:20px;
     list-style-type: none;
     padding-left:0 ;
+    margin-top:15px;
+    margin-bottom:15px;
+    margin-right:15px;
 }
 
 .card-group-item:nth-child(1) {
@@ -32,7 +35,8 @@ font-style: normal;
 font-weight: 400;
 font-size: 20px;
 line-height: 28px;
-margin-bottom: 7px;
+/* margin-bottom: 7px; */
+margin-right: 20px;
 }
 
 .card-group-item:nth-child(2) {
@@ -49,6 +53,10 @@ margin-bottom: 9px;
     background: #FAFAFA;
     border: 1px solid #D9D9D9;
     border-radius: 2px;
+    margin-right: 3px;
+    padding-left: 1px;
+    padding-right: 1px;
+    font-size: 12px;
     }
 
 .card-group-item:nth-child(4) {
@@ -58,6 +66,11 @@ margin-bottom: 9px;
     font-size: 12px;
     line-height: 22px;
     margin-top: 7px;
+}
+
+.card-group-item:nth-child(5) {
+    position: absolute;
+   bottom:15px
 }
 
 .card-spin {

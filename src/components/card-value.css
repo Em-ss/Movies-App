@@ -1,0 +1,11 @@
+.card-group-item-rating {
+    position: absolute;
+    top:12px;
+    right: 9px;
+    border: 2px solid;
+    border-radius:100%;
+    width: 30px;
+height: 30px;
+text-align: center;
+vertical-align: middle;
+}

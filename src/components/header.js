@@ -1,10 +1,16 @@
 import React from 'react';
-
-export const Header = ({ onChangeRated, onChangeRated1 }) => {
+import './header.css';
+export const Header = ({ onChangeRated2, onChangeRated1, btn }) => {
+  const btn1 = btn ? 'btn search' : 'search';
+  const btn2 = btn ? 'rated' : 'btn rated';
   return (
-    <>
-      <button onClick={onChangeRated1}>Search</button>
-      <button onClick={onChangeRated}>Rated</button>
-    </>
+    <div className="header">
+      <button className={btn1} onClick={onChangeRated1}>
+        Search
+      </button>
+      <button className={btn2} onClick={onChangeRated2}>
+        Rated
+      </button>
+    </div>
   );
 };
